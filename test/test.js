@@ -4,10 +4,10 @@ const heyhoy = require('../');
 
 const codes = [
         `
-        x = 5
-        y = x * 5
+x = 5
+y = x * 5
 
-        print y
+print y
         `,
 
         '',
@@ -18,16 +18,16 @@ const codes = [
         `,
 
         `
-        x1 = 20
-        y1 = 30
-        x2 = 30
-        y2 = 40
+x1 = 20
+y1 = 30
+x2 = 30
+y2 = 40
 
-        res = x1 * x2 + y1 * y2
+res = x1 * x2 + y1 * y2
 
-        print res
+print res
         `,
-]
+];
 
 describe('Work properly', function ()
 {
