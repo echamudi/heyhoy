@@ -15,7 +15,6 @@ Lexemes and Tokens
 [0-9]+      NUMBER
 [a-z]+      IDENTIFIER
 \n          NEW_LINE
-print       PRINT
 ```
 
 Backus-Naur Form
