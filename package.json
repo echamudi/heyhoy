@@ -4,7 +4,8 @@
   "description": "(WIP - Experimental) Damn simple programming language built using javascript from scratch (no jison, no bison).",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/test.js"
+    "test": "mocha ./test/test.js",
+    "test-verbose": "mocha ./test/test.js --verbose"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/ezhmd/heyhoy#readme",
   "devDependencies": {
+    "@types/node": "^12.12.6",
     "eslint": "6.5.x",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
