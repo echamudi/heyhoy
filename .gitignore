@@ -61,5 +61,4 @@ typings/
 .next
 
 # heyhoy
-/dev-config.json
 /playground.js
