@@ -77,7 +77,7 @@ Tokens & Lexemes
   [ 0, 'print' ], [ 0, 'y' ],
   [ 2, '\n' ],    [ 14, '' ]
 ]
-Tokens & Lexemes
+Parse tree
 Initial Lex --->  [ 2, '\n' ]
  Enter Program
     Enter Statement
