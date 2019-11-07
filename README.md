@@ -6,6 +6,11 @@
 
 > Only the lexer and syntax parser is working for the meantime.
 
+| Branch | Status |
+| - | - |
+| master | [![Build Status](https://travis-ci.org/ezhmd/heyhoy.svg?branch=master)](https://travis-ci.org/ezhmd/heyhoy) |
+| develop | [![Build Status](https://travis-ci.org/ezhmd/heyhoy.svg?branch=develop)](https://travis-ci.org/ezhmd/heyhoy) |
+
 ## Language Grammar
 
 Lexemes and Tokens
@@ -139,6 +144,7 @@ Initial Lex --->  [ 2, '\n' ]
        Exit Program
     Exit Program
 ```
+
 ## License
 
 Copyright 2019 Ezzat Chamudi
