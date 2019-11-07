@@ -6,7 +6,7 @@
 
 > Only the lexer and syntax parser is working for the meantime.
 
-# Language Grammar
+## Language Grammar
 
 Lexemes and Tokens
 
@@ -45,7 +45,7 @@ Backus-Naur Form
 > Yes, currently this language currently only supports multiplication and addition on integer.
 > Might be expanded further sometime...
 
-# See Examples
+## See Examples
 
 ```
 git clone https://github.com/ezhmd/heyhoy.git
@@ -139,7 +139,7 @@ Initial Lex --->  [ 2, '\n' ]
        Exit Program
     Exit Program
 ```
-# License
+## License
 
 Copyright 2019 Ezzat Chamudi
 
