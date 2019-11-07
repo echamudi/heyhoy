@@ -1,0 +1,24 @@
+{
+  "name": "heyhoy",
+  "version": "0.0.1",
+  "description": "(WIP - Experimental) Damn simple programming language built using javascript from scratch (no jison, no bison).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ezhmd@github.com/ezhmd/heyhoy.git"
+  },
+  "author": "Ezzat Chamudi",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ezhmd/heyhoy/issues"
+  },
+  "homepage": "https://github.com/ezhmd/heyhoy#readme",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
