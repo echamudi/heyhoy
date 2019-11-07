@@ -40,7 +40,7 @@ Backus-Naur Form
         | IDENTIFIER
 ```
 
-> Yes, currently this language currently only support multiplication and addition on integer.
+> Yes, currently this language currently only supports multiplication and addition on integer.
 > Might be expanded further sometime...
 
 # License
