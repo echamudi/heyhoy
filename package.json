@@ -4,7 +4,7 @@
   "description": "(WIP - Experimental) Damn simple programming language built using javascript from scratch (no jison, no bison).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test/test.js"
   },
   "repository": {
     "type": "git",
