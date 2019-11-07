@@ -2,6 +2,18 @@
 
 const heyhoy = require('../');
 
+/** @type {boolean} */
+let verbose;
+
+if (process.argv[3] === '--verbose')
+{
+        verbose = true;
+}
+else
+{
+        verbose = false;
+}
+
 const codes = [
         `
 x = 5
@@ -35,7 +47,7 @@ describe('Work properly', function ()
         {
                 it(`passes test ${index}`, function ()
                 {
-                        heyhoy(code, true);
+                        heyhoy(code, verbose);
                 });
         });
 });
