@@ -16,7 +16,7 @@ First, import the module:
 const heyhoy = require('heyhoy');
 ```
 
-Basic calculation example:
+Basic calculation:
 
 ```js
 const code1 = `
@@ -30,7 +30,8 @@ area = 2 * area
 return area
 `;
 
-console.log('The surface area of cuboid is ' + heyhoy(code1));
+console.log('The surface area of the cuboid is ' + heyhoy(code1));
+// The surface area of the cuboid is 16000
 ```
 
 Printing value example:
@@ -44,10 +45,8 @@ print x
 `;
 
 heyhoy(code2);
-```
-```
-10
-30
+// 10
+// 30
 ```
 ## Language Grammar
 
