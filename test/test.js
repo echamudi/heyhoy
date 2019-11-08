@@ -1,5 +1,6 @@
 /* eslint-disable prefer-arrow-callback */
 
+const assert = require('assert');
 const heyhoy = require('../');
 
 /** @type {boolean} */
@@ -14,40 +15,78 @@ else
         verbose = false;
 }
 
-const codes = [
-        `
-x = 5
-y = x * 5
-
-print y
-        `,
-
-        '',
-
-        `
-
-
-        `,
-
-        `
-x1 = 20
-y1 = 30
-x2 = 30
-y2 = 40
-
-res = x1 * x2 + y1 * y2
-
-print res
-        `,
-];
-
 describe('Work properly', function ()
 {
-        codes.forEach((code, index) =>
+        it('accepts empty code', function ()
         {
-                it(`passes test ${index}`, function ()
-                {
-                        heyhoy(code, verbose);
-                });
+                const code1 = '';
+                heyhoy(code1, verbose);
+
+                const code2 = `
+                
+                
+                
+                `;
+                heyhoy(code2, verbose);
+        });
+
+        it('prints number', function ()
+        {
+                const code = `
+                x = 20 + 5
+                print x
+                x = x + 5
+                print x
+                `;
+                heyhoy(code, verbose);
+        });
+
+        it('gives the last return value', function ()
+        {
+                const code = `
+                y = 2 * 5
+                x = 3 + 10 * y
+                x = x * 2
+
+                return y
+                return x
+                `;
+
+                const result = heyhoy(code, verbose);
+                assert.deepStrictEqual(result, 206);
+        });
+
+        it('random test: calculate surface area of cuboid', function ()
+        {
+                const code = `
+                width = 50
+                length = 100
+                height = 20
+
+                area = width * length + length * height + width * height
+                area = 2 * area
+
+                return area
+                `;
+
+                const result = heyhoy(code, verbose);
+                assert.deepStrictEqual(result, 16000);
+        });
+
+        it('random test 😃', function ()
+        {
+                const code = `
+                x1 = 10
+                x2 = 20
+                y1 = 50
+                y2 = 60
+
+                res = x1 * x2 + y1 * y2
+
+                return res
+                `;
+
+                const result = heyhoy(code, verbose);
+                assert.deepStrictEqual(result, 3200);
         });
 });
