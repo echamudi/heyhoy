@@ -2,9 +2,7 @@
 
 (WIP - Experimental) Damn simple programming language built using javascript from scratch (no jison, no bison).
 
-> This project is created to me help studying recursive-descent top-down parser implementation.
-
-> Only the lexer and syntax parser is working for the meantime.
+> This project was created to help me studying recursive-descent top-down parser implementation.
 
 | Branch | Status |
 | - | - |
