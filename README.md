@@ -1,6 +1,6 @@
 # HEYHOY!
 
-(WIP - Experimental) Damn simple programming language built using javascript from scratch (no jison, no bison).
+Damn simple programming language built using javascript from scratch (no jison, no bison).
 
 > This project was created to help me studying recursive-descent top-down parser implementation.
 
@@ -9,6 +9,46 @@
 | master | [![Build Status](https://travis-ci.org/ezhmd/heyhoy.svg?branch=master)](https://travis-ci.org/ezhmd/heyhoy) |
 | develop | [![Build Status](https://travis-ci.org/ezhmd/heyhoy.svg?branch=develop)](https://travis-ci.org/ezhmd/heyhoy) |
 
+## Usage
+
+First, import the module:
+```js
+const heyhoy = require('heyhoy');
+```
+
+Basic calculation example:
+
+```js
+const code1 = `
+width = 50
+length = 100
+height = 20
+
+area = width * length + length * height + width * height
+area = 2 * area
+
+return area
+`;
+
+console.log('The surface area of cuboid is ' + heyhoy(code1));
+```
+
+Printing value example:
+
+```js
+const code2 = `
+x = 10
+print x
+x = x + 20
+print x
+`;
+
+heyhoy(code2);
+```
+```
+10
+30
+```
 ## Language Grammar
 
 Lexemes and Tokens
@@ -45,104 +85,123 @@ Backus-Naur Form
         | IDENTIFIER
 ```
 
-> Yes, currently this language currently only supports multiplication and addition on integer.
+> Yes, currently this language currently only supports multiplication and addition on integer. 😅
 > Might be expanded further sometime...
 
-## See Examples
+## Show Abstract Syntax Tree
 
-```
-git clone https://github.com/ezhmd/heyhoy.git
-npm run test-verbose
-cd heyhoy
-npm install
-npm run test-verbose
+```js
+const code3 = `
+x = 1
+y = 2
+z = x * y
+`;
+
+// Put true at the second parameter for verbose
+heyhoy(code3, true);
 ```
 
-Result example:
+AST
 
 ```
 Start Hey Hoy!
 Inputted code:
 
-x = 5
-y = x * 5
-
-print y
+x = 1
+y = 2
+z = x * y + 3
 
 Tokens & Lexemes
 [
-  [ 2, '\n' ],    [ 0, 'x' ],
-  [ 11, '=' ],    [ 1, '5' ],
-  [ 2, '\n' ],    [ 0, 'y' ],
-  [ 11, '=' ],    [ 0, 'x' ],
-  [ 12, '*' ],    [ 1, '5' ],
-  [ 2, '\n' ],    [ 2, '\n' ],
-  [ 0, 'print' ], [ 0, 'y' ],
-  [ 2, '\n' ],    [ 14, '' ]
+  [ 2, '\n' ], [ 0, 'x' ],
+  [ 11, '=' ], [ 1, '1' ],
+  [ 2, '\n' ], [ 0, 'y' ],
+  [ 11, '=' ], [ 1, '2' ],
+  [ 2, '\n' ], [ 0, 'z' ],
+  [ 11, '=' ], [ 0, 'x' ],
+  [ 12, '*' ], [ 0, 'y' ],
+  [ 13, '+' ], [ 1, '3' ],
+  [ 2, '\n' ], [ 14, '' ]
 ]
 Parse tree
 Initial Lex --->  [ 2, '\n' ]
  Enter Program
     Enter Statement
     Exit Statement
-    Called Lex --->  [ 0, 'x' ]
+    Call lex [ 0, 'x' ]
     Enter Program
        Enter Statement
-          Called Lex --->  [ 11, '=' ]
+          Call lex [ 11, '=' ]
           Enter Action
-             Called Lex --->  [ 1, '5' ]
+             Call lex [ 1, '1' ]
              Enter Expression
                 Enter Factor
                    Enter Term
-                      Called Lex --->  [ 2, '\n' ]
+                      Call lex [ 2, '\n' ]
                    Exit Term
                 Exit Factor
              Exit Expression
+             Storing variable -->  x = 1
+             Current variables -->  { x: 1 }
           Exit Action
        Exit Statement
-       Called Lex --->  [ 0, 'y' ]
+       Call lex [ 0, 'y' ]
        Enter Program
           Enter Statement
-             Called Lex --->  [ 11, '=' ]
+             Call lex [ 11, '=' ]
              Enter Action
-                Called Lex --->  [ 0, 'x' ]
+                Call lex [ 1, '2' ]
                 Enter Expression
                    Enter Factor
                       Enter Term
-                         Called Lex --->  [ 12, '*' ]
+                         Call lex [ 2, '\n' ]
                       Exit Term
-                      Called Lex --->  [ 1, '5' ]
-                      Enter Factor
-                         Enter Term
-                            Called Lex --->  [ 2, '\n' ]
-                         Exit Term
-                      Exit Factor
                    Exit Factor
                 Exit Expression
+                Storing variable -->  y = 2
+                Current variables -->  { x: 1, y: 2 }
              Exit Action
           Exit Statement
-          Called Lex --->  [ 2, '\n' ]
+          Call lex [ 0, 'z' ]
           Enter Program
              Enter Statement
+                Call lex [ 11, '=' ]
+                Enter Action
+                   Call lex [ 0, 'x' ]
+                   Enter Expression
+                      Enter Factor
+                         Enter Term
+                            Call lex [ 12, '*' ]
+                         Exit Term
+                         Call lex [ 0, 'y' ]
+                         Enter Factor
+                            Enter Term
+                               Call lex [ 13, '+' ]
+                            Exit Term
+                         Exit Factor
+                      Exit Factor
+                      Call lex [ 1, '3' ]
+                      Enter Expression
+                         Enter Factor
+                            Enter Term
+                               Call lex [ 2, '\n' ]
+                            Exit Term
+                         Exit Factor
+                      Exit Expression
+                   Exit Expression
+                   Storing variable -->  z = 5
+                   Current variables -->  { x: 1, y: 2, z: 5 }
+                Exit Action
              Exit Statement
-             Called Lex --->  [ 0, 'print' ]
+             Call lex [ 14, '' ]
              Enter Program
-                Enter Statement
-                   Called Lex --->  [ 0, 'y' ]
-                   Enter Action
-                      Called Lex --->  [ 2, '\n' ]
-                   Exit Action
-                Exit Statement
-                Called Lex --->  [ 14, '' ]
-                Enter Program
-                   Bye!
-                Exit Program
+                Bye!
              Exit Program
           Exit Program
        Exit Program
     Exit Program
+ Exit Program
 ```
-
 ## License
 
 Copyright 2019 Ezzat Chamudi
