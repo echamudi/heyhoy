@@ -85,6 +85,8 @@ Backus-Naur Form
 > Yes, currently this language currently only supports multiplication and addition on integer. 😅
 > Might be expanded further sometime...
 
+> TODO: Make the expression and factor left associative
+
 ## Show Abstract Syntax Tree
 
 ```js
