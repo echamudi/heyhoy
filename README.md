@@ -68,11 +68,9 @@ Backus-Naur Form
         | <statement> 
         | EOF
 
-<statement> -> IDENTIFIER <action> NEW_LINE
+<statement> -> IDENTIFIER '=' <expression> NEW_LINE     // Assign
+        | IDENTIFIER IDENTIFIER                         // Function, can only take one argument
         | NEW_LINE
-
-<action> -> '=' <expression>            // Assign
-        | IDENTIFIER                    // Function, can only take one argument
 
 <expression> -> <factor> '+' <expression>
         | <factor>
@@ -103,12 +101,12 @@ heyhoy(code3, true);
 AST
 
 ```
-Start Hey Hoy!
+Start HEYHOY!
 Inputted code:
 
 x = 1
 y = 2
-z = x * y + 3
+z = x * y
 
 Tokens & Lexemes
 [
@@ -119,7 +117,6 @@ Tokens & Lexemes
   [ 2, '\n' ], [ 0, 'z' ],
   [ 11, '=' ], [ 0, 'x' ],
   [ 12, '*' ], [ 0, 'y' ],
-  [ 13, '+' ], [ 1, '3' ],
   [ 2, '\n' ], [ 14, '' ]
 ]
 Parse tree
@@ -131,8 +128,22 @@ Initial Lex --->  [ 2, '\n' ]
     Enter Program
        Enter Statement
           Call lex [ 11, '=' ]
-          Enter Action
-             Call lex [ 1, '1' ]
+          Call lex [ 1, '1' ]
+          Enter Expression
+             Enter Factor
+                Enter Term
+                   Call lex [ 2, '\n' ]
+                Exit Term
+             Exit Factor
+          Exit Expression
+          Storing variable -->  x = 1
+          Current variables -->  { x: 1 }
+       Exit Statement
+       Call lex [ 0, 'y' ]
+       Enter Program
+          Enter Statement
+             Call lex [ 11, '=' ]
+             Call lex [ 1, '2' ]
              Enter Expression
                 Enter Factor
                    Enter Term
@@ -140,57 +151,29 @@ Initial Lex --->  [ 2, '\n' ]
                    Exit Term
                 Exit Factor
              Exit Expression
-             Storing variable -->  x = 1
-             Current variables -->  { x: 1 }
-          Exit Action
-       Exit Statement
-       Call lex [ 0, 'y' ]
-       Enter Program
-          Enter Statement
-             Call lex [ 11, '=' ]
-             Enter Action
-                Call lex [ 1, '2' ]
-                Enter Expression
-                   Enter Factor
-                      Enter Term
-                         Call lex [ 2, '\n' ]
-                      Exit Term
-                   Exit Factor
-                Exit Expression
-                Storing variable -->  y = 2
-                Current variables -->  { x: 1, y: 2 }
-             Exit Action
+             Storing variable -->  y = 2
+             Current variables -->  { x: 1, y: 2 }
           Exit Statement
           Call lex [ 0, 'z' ]
           Enter Program
              Enter Statement
                 Call lex [ 11, '=' ]
-                Enter Action
-                   Call lex [ 0, 'x' ]
-                   Enter Expression
+                Call lex [ 0, 'x' ]
+                Enter Expression
+                   Enter Factor
+                      Enter Term
+                         Call lex [ 12, '*' ]
+                      Exit Term
+                      Call lex [ 0, 'y' ]
                       Enter Factor
                          Enter Term
-                            Call lex [ 12, '*' ]
+                            Call lex [ 2, '\n' ]
                          Exit Term
-                         Call lex [ 0, 'y' ]
-                         Enter Factor
-                            Enter Term
-                               Call lex [ 13, '+' ]
-                            Exit Term
-                         Exit Factor
                       Exit Factor
-                      Call lex [ 1, '3' ]
-                      Enter Expression
-                         Enter Factor
-                            Enter Term
-                               Call lex [ 2, '\n' ]
-                            Exit Term
-                         Exit Factor
-                      Exit Expression
-                   Exit Expression
-                   Storing variable -->  z = 5
-                   Current variables -->  { x: 1, y: 2, z: 5 }
-                Exit Action
+                   Exit Factor
+                Exit Expression
+                Storing variable -->  z = 2
+                Current variables -->  { x: 1, y: 2, z: 2 }
              Exit Statement
              Call lex [ 14, '' ]
              Enter Program
