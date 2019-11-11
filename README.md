@@ -72,11 +72,9 @@ Backus-Naur Form
         | IDENTIFIER IDENTIFIER                         // Function, can only take one argument
         | NEW_LINE
 
-<expression> -> <factor> '+' <expression>
-        | <factor>
+<expression> -> <expression> { '+' <expression> }
 
-<factor> -> <term> '*' <factor>
-        | <term>
+<factor> -> <factor> { '*' <term> }
 
 <term> -> NUMBER
         | IDENTIFIER
@@ -84,8 +82,6 @@ Backus-Naur Form
 
 > Yes, currently this language currently only supports multiplication and addition on integer. 😅
 > Might be expanded further sometime...
-
-> TODO: Make the expression and factor left associative
 
 ## Show Abstract Syntax Tree
 
